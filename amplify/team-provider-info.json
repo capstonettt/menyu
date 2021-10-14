@@ -1,0 +1,41 @@
+{
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-menyu-prod-130456-authRole",
+      "UnauthRoleArn": "arn:aws:iam::522741343441:role/amplify-menyu-prod-130456-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::522741343441:role/amplify-menyu-prod-130456-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-menyu-prod-130456-deployment",
+      "UnauthRoleName": "amplify-menyu-prod-130456-unauthRole",
+      "StackName": "amplify-menyu-prod-130456",
+      "StackId": "arn:aws:cloudformation:us-east-2:522741343441:stack/amplify-menyu-prod-130456/3e9335b0-2d19-11ec-b416-02f14f461a96",
+      "AmplifyAppId": "d1ac5hakempkoy"
+    }
+  },
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-menyu-test-130646-authRole",
+      "UnauthRoleArn": "arn:aws:iam::522741343441:role/amplify-menyu-test-130646-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::522741343441:role/amplify-menyu-test-130646-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-menyu-test-130646-deployment",
+      "UnauthRoleName": "amplify-menyu-test-130646-unauthRole",
+      "StackName": "amplify-menyu-test-130646",
+      "StackId": "arn:aws:cloudformation:us-east-2:522741343441:stack/amplify-menyu-test-130646/7f9ada90-2d19-11ec-a02f-0ac67feaac3e",
+      "AmplifyAppId": "d1ac5hakempkoy"
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-menyu-dev-130759-authRole",
+      "UnauthRoleArn": "arn:aws:iam::522741343441:role/amplify-menyu-dev-130759-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::522741343441:role/amplify-menyu-dev-130759-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-menyu-dev-130759-deployment",
+      "UnauthRoleName": "amplify-menyu-dev-130759-unauthRole",
+      "StackName": "amplify-menyu-dev-130759",
+      "StackId": "arn:aws:cloudformation:us-east-2:522741343441:stack/amplify-menyu-dev-130759/aac78ec0-2d19-11ec-b601-0217b6244c72",
+      "AmplifyAppId": "d1ac5hakempkoy"
+    }
+  }
+}
