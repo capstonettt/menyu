@@ -1,0 +1,55 @@
+.bodytop{
+padding: 8% 20%;
+    width: 100%;
+    background: #FFEFD5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.textarea {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.boldText{
+    margin: 0em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    color: #6B2200;
+}
+
+.text{
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    /*font-size: 18px;
+    line-height: 25px;
+    */
+    color: #6B2200;
+}
+
+
+.image{
+    width: 80%;
+    height: auto;
+}

@@ -10,7 +10,7 @@ const Header = () => {
             <h1 className={classes.text}>MENYU</h1>
             <span className={classes.buttons}>
                 <HeaderLoginButton />
-                <GetStartedButton />
+                <GetStartedButton/>
             </span>
         </header>
     );

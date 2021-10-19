@@ -1,9 +1,5 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 5rem;
     background-color: #fbcb7b;
     color: white;
     display: flex;
@@ -19,7 +15,7 @@
 }
 
 .buttons {
-    width: 400px;
+    /*width: 400px;*/
     display: flex;
     align-content: center;
 }

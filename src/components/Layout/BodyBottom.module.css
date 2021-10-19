@@ -1,0 +1,73 @@
+.bodybottom{
+    padding: 3% 20%;
+    width: 100%;
+    background: #FFDA9D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textarea {
+    display: flex;
+    flex-direction: column;
+}
+
+.boldtext{
+    margin-top: 2em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    color: #6B2200;
+
+}
+
+.text{
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    color: #6B2200;
+}
+
+.QRcodeImage{
+    width: 100%;
+    height: auto;
+}
+
+.button{
+    margin-top: 4em;
+    margin-left: 2em;
+    width: 50%;
+    height: 10%;
+    background: #FFDA9D;
+    /* primary */
+    border: 1px solid #EB5E30;
+    box-sizing: border-box;
+    border-radius: 40px;
+    color:  #EB5E30;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.phoneImage{
+    width: 100%;
+    height: auto;
+}

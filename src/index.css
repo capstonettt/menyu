@@ -9,7 +9,10 @@ html {
 }
 
 body {
-  margin: 0;
   background-color: #ffefd4;
+  display: flex;
+  flex-direction: column;
+  /*added*/
+  
+  margin: 0;
 }
-
