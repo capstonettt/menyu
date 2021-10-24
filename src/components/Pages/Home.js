@@ -9,7 +9,6 @@ import Storage from '@aws-amplify/storage';
 import { API } from '@aws-amplify/api';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 
-import gql from 'graphql-tag'
 import {v4 as uuid} from 'uuid';
 
 const Home = (props) => {
