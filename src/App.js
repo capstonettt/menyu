@@ -7,22 +7,16 @@ import Home from './components/Pages/Home';
 import Menu from './components/Pages/Menu';
 import AuthProcessContext from './context/auth-process-context';
 
-import Amplify, { Auth, API, graphqlOperation, Storage } from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 
-import AWSAppSyncClient from "aws-appsync";
-
-import { AmplifyAuthenticator, AmplifySignIn, AmplifySignOut, AmplifySignUp } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator } from '@aws-amplify/ui-react';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import awsconfig from './aws-exports';
-import { ConsoleLogger } from '@aws-amplify/core';
 
 Amplify.configure(awsconfig);
 
-const GRAPHQL_API_REGION = awsconfig.aws_appsync_region
-const GRAPHQL_API_ENDPOINT_URL = awsconfig.aws_appsync_graphqlEndpoint
 const S3_BUCKET_REGION = awsconfig.aws_user_files_s3_bucket_region
 const S3_BUCKET_NAME = awsconfig.aws_user_files_s3_bucket
-const AUTH_TYPE = awsconfig.aws_appsync_authenticationType
 
 /*
 const client = new AWSAppSyncClient({

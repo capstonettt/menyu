@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { listRestrants } from '../../graphql/queries';
-import { createRestrant, deleteRestrant } from '../../graphql/mutations';
-import Auth from '@aws-amplify/auth';
-import { AmplifySignIn, AmplifySignOut } from '@aws-amplify/ui-react';
+import { createRestrant } from '../../graphql/mutations';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 import Storage from '@aws-amplify/storage';
 import { API } from '@aws-amplify/api';
