@@ -2,6 +2,11 @@
   "dev": {
     "configLevel": "project",
     "useProfile": false,
-    "awsConfigFilePath": "/Users/nishimuratomohiro/.amplify/awscloudformation/GczRjMQdAJ"
+    "awsConfigFilePath": "/home/takeshi/.amplify/awscloudformation/dubSzChfk2"
+  },
+  "test": {
+    "configLevel": "project",
+    "useProfile": false,
+    "awsConfigFilePath": "/home/takeshi/.amplify/awscloudformation/uUjFWiqFmf"
   }
 }

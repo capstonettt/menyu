@@ -19,24 +19,31 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 7,
-              "description": "demo"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authmenyu621800e5"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 365,
+                "description": "restrants"
+              }
+            }
+          ]
         },
         "GraphQLAPIIdOutput": "qsuvqofvvfc4nar64fw6kcnzbe",
         "GraphQLAPIEndpointOutput": "https://fdd22jih25hohermvqyp6v3xxu.appsync-api.us-east-2.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-ddeqt6pctreopmatieohgtu36a"
+        "GraphQLAPIKeyOutput": "da2-jjjfpm3rfnadbisvdt7zkdog6e"
       },
-      "lastPushTimeStamp": "2021-10-17T19:49:03.848Z",
+      "lastPushTimeStamp": "2021-10-21T03:24:18.984Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-menyu-dev-130759-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apitestapi"
       },
-      "lastPushDirHash": "IuBmeYX/zzeD8kA0Nb31WkPS9iE="
+      "lastPushDirHash": "YPmny2IelL1BokmlLIXcZ8Bv/jk="
     }
   },
   "auth": {
@@ -73,12 +80,26 @@
         "IdentityPoolName": "menyu621800e5_identitypool_621800e5__dev",
         "UserPoolName": "menyu621800e5_userpool_621800e5"
       },
-      "lastPushTimeStamp": "2021-10-17T19:49:03.848Z",
+      "lastPushTimeStamp": "2021-10-21T03:24:18.699Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-menyu-dev-130759-deployment/amplify-cfn-templates/auth/menyu621800e5-cloudformation-template.yml",
         "logicalId": "authmenyu621800e5"
+      }
+    }
+  },
+  "storage": {
+    "logos": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "BucketName": "logosbucket130759-dev",
+        "Region": "us-east-2"
       },
-      "lastPushDirHash": "ZTTdGGb2AkVFttUjKn15D4m2mNE="
+      "lastPushTimeStamp": "2021-10-21T03:24:18.701Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-menyu-dev-130759-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
+        "logicalId": "storagelogos"
+      }
     }
   }
 }

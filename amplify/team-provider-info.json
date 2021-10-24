@@ -23,6 +23,11 @@
       "StackName": "amplify-menyu-test-130646",
       "StackId": "arn:aws:cloudformation:us-east-2:522741343441:stack/amplify-menyu-test-130646/7f9ada90-2d19-11ec-a02f-0ac67feaac3e",
       "AmplifyAppId": "d1ac5hakempkoy"
+    },
+    "categories": {
+      "auth": {
+        "menyu621800e5": {}
+      }
     }
   },
   "dev": {

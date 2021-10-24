@@ -1,6 +1,6 @@
 {
     "identityPoolName": "menyu621800e5_identitypool_621800e5",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "menyu621800e5",
     "userPoolName": "menyu621800e5_userpool_621800e5",
     "autoVerifiedAttributes": [

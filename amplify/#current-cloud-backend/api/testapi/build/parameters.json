@@ -3,6 +3,12 @@
     "AppSyncApiName": "testapi",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": false,
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authmenyu621800e5",
+            "Outputs.UserPoolId"
+        ]
+    },
     "S3DeploymentBucket": "amplify-menyu-dev-130759-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/79cc72e6eb67236e306b17a4590b571376c06621"
+    "S3DeploymentRootKey": "amplify-appsync-files/902addbf7d908ddeda6b6da0c1d18519e0735f59"
 }

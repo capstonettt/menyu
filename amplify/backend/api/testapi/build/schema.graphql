@@ -1,9 +1,10 @@
-type Todo {
+type Restrant @aws_api_key @aws_cognito_user_pools {
   id: ID!
   name: String!
-  description: String
+  image: String
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  owner: String
 }
 
 enum ModelSortDirection {
@@ -11,8 +12,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelTodoConnection {
-  items: [Todo]
+type ModelRestrantConnection @aws_api_key @aws_cognito_user_pools {
+  items: [Restrant]
   nextToken: String
 }
 
@@ -89,13 +90,13 @@ input ModelSizeInput {
   between: [Int]
 }
 
-input ModelTodoFilterInput {
+input ModelRestrantFilterInput {
   id: ModelIDInput
   name: ModelStringInput
-  description: ModelStringInput
-  and: [ModelTodoFilterInput]
-  or: [ModelTodoFilterInput]
-  not: ModelTodoFilterInput
+  image: ModelStringInput
+  and: [ModelRestrantFilterInput]
+  or: [ModelRestrantFilterInput]
+  not: ModelRestrantFilterInput
 }
 
 enum ModelAttributeTypes {
@@ -112,42 +113,42 @@ enum ModelAttributeTypes {
 }
 
 type Query {
-  getTodo(id: ID!): Todo
-  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  getRestrant(id: ID!): Restrant @aws_api_key @aws_cognito_user_pools
+  listRestrants(filter: ModelRestrantFilterInput, limit: Int, nextToken: String): ModelRestrantConnection @aws_api_key @aws_cognito_user_pools
 }
 
-input CreateTodoInput {
+input CreateRestrantInput {
   id: ID
   name: String!
-  description: String
+  image: String
 }
 
-input UpdateTodoInput {
+input UpdateRestrantInput {
   id: ID!
   name: String
-  description: String
+  image: String
 }
 
-input DeleteTodoInput {
+input DeleteRestrantInput {
   id: ID!
 }
 
 type Mutation {
-  createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
-  updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
-  deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
+  createRestrant(input: CreateRestrantInput!, condition: ModelRestrantConditionInput): Restrant
+  updateRestrant(input: UpdateRestrantInput!, condition: ModelRestrantConditionInput): Restrant
+  deleteRestrant(input: DeleteRestrantInput!, condition: ModelRestrantConditionInput): Restrant
 }
 
-input ModelTodoConditionInput {
+input ModelRestrantConditionInput {
   name: ModelStringInput
-  description: ModelStringInput
-  and: [ModelTodoConditionInput]
-  or: [ModelTodoConditionInput]
-  not: ModelTodoConditionInput
+  image: ModelStringInput
+  and: [ModelRestrantConditionInput]
+  or: [ModelRestrantConditionInput]
+  not: ModelRestrantConditionInput
 }
 
 type Subscription {
-  onCreateTodo: Todo @aws_subscribe(mutations: ["createTodo"])
-  onUpdateTodo: Todo @aws_subscribe(mutations: ["updateTodo"])
-  onDeleteTodo: Todo @aws_subscribe(mutations: ["deleteTodo"])
+  onCreateRestrant(owner: String): Restrant @aws_subscribe(mutations: ["createRestrant"]) @aws_api_key @aws_cognito_user_pools
+  onUpdateRestrant(owner: String): Restrant @aws_subscribe(mutations: ["updateRestrant"]) @aws_api_key @aws_cognito_user_pools
+  onDeleteRestrant(owner: String): Restrant @aws_subscribe(mutations: ["deleteRestrant"]) @aws_api_key @aws_cognito_user_pools
 }

@@ -102,7 +102,21 @@
                         }
                     ]
                 },
-                "AuthenticationType": "API_KEY"
+                "AuthenticationType": "AMAZON_COGNITO_USER_POOLS",
+                "UserPoolConfig": {
+                    "UserPoolId": {
+                        "Ref": "AuthCognitoUserPoolId"
+                    },
+                    "AwsRegion": {
+                        "Ref": "AWS::Region"
+                    },
+                    "DefaultAction": "ALLOW"
+                },
+                "AdditionalAuthenticationProviders": [
+                    {
+                        "AuthenticationType": "API_KEY"
+                    }
+                ]
             }
         },
         "GraphQLAPIKey": {
@@ -114,18 +128,31 @@
                         "ApiId"
                     ]
                 },
-                "Description": "demo",
+                "Description": "restrants",
                 "Expires": {
                     "Fn::If": [
                         "APIKeyExpirationEpochIsPositive",
                         {
                             "Ref": "APIKeyExpirationEpoch"
                         },
-                        1635104882
+                        1666322559
                     ]
                 }
             },
             "Condition": "ShouldCreateAPIKey"
+        },
+        "NoneDataSource": {
+            "Type": "AWS::AppSync::DataSource",
+            "Properties": {
+                "ApiId": {
+                    "Fn::GetAtt": [
+                        "GraphQLAPI",
+                        "ApiId"
+                    ]
+                },
+                "Name": "NONE",
+                "Type": "NONE"
+            }
         },
         "GraphQLSchema": {
             "Type": "AWS::AppSync::GraphQLSchema",
@@ -151,7 +178,7 @@
                 }
             }
         },
-        "Todo": {
+        "Restrant": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "Parameters": {
@@ -216,13 +243,14 @@
                                 "Ref": "S3DeploymentRootKey"
                             },
                             "stacks",
-                            "Todo.json"
+                            "Restrant.json"
                         ]
                     ]
                 }
             },
             "DependsOn": [
-                "GraphQLSchema"
+                "GraphQLSchema",
+                "NoneDataSource"
             ]
         },
         "CustomResourcesjson": {
@@ -268,7 +296,7 @@
             "DependsOn": [
                 "GraphQLAPI",
                 "GraphQLSchema",
-                "Todo"
+                "Restrant"
             ]
         }
     },
