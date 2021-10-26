@@ -1,0 +1,14 @@
+# TO COMMIT to local env
+    $ git add *
+    $ git commit -m "any commit message"
+
+# TO PUSH to remote repository (so you can share your code on Github)
+    1. First, check the current branch is mobile_branch by running the following
+        $ git branch
+    2. 
+        $ git add *
+        $ git commit -m "any commit message"
+        $ git push origin mobile_branch
+    3. Check if the remote branch is updated on Github
+
+    
