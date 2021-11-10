@@ -1,0 +1,12 @@
+.button {
+    margin-top: 1%;
+    margin-bottom: -5%;
+    margin-left: 5%;
+    width: 10%;
+    height: 20%;
+    border: 0px;
+    background: transparent;
+    color: #6B2200;
+    font-size: 200%;
+    font-weight: 800;
+}

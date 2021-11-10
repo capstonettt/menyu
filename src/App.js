@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Welcome from './components/Pages/Welcome';
 import Home from './components/Pages/Home';
 import Menu from './components/Pages/Menu';
+import AuthPage from './components/Pages/AuthPage';
 import AuthProcessContext from './context/auth-process-context';
 
 import Amplify, { Auth } from 'aws-amplify';
@@ -71,6 +72,11 @@ const App = () => {
     fetchSession()
   }, [])
 
+  const resetAuthState = () => {
+    setInAuthProcess(false);
+    setIsSigningUp(false);
+  }
+
   async function fetchSession() {
     try {
       console.log('from fetchSession');
@@ -124,11 +130,7 @@ const App = () => {
               }}
             >
               {!inAuthProcess && <Welcome />}
-              {inAuthProcess && 
-                <AmplifyAuthenticator 
-                  initialAuthState={isSigningUp ? AuthState.SignUp : AuthState.SignIn }
-                ></AmplifyAuthenticator>
-              }
+              {inAuthProcess && <AuthPage isSigningUp={isSigningUp} onResetAuthState={resetAuthState}/>}
             </AuthProcessContext.Provider>
           )
         }

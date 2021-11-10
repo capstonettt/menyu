@@ -5,7 +5,6 @@ import BodyTop from '../Layout/BodyTop';
 import BodyBottom from '../Layout/BodyBottom';
 import Footer from '../Layout/Footer';
 
-import classes from './Welcome.module.css';
 
 const Welcome = () => {
     return (

@@ -1,4 +1,4 @@
-type Restrant 
+type Restaurant 
   @model 
   @auth(
     rules: [
@@ -8,5 +8,42 @@ type Restrant
 
   id: ID!
   name: String!
-  image: String
+  logo: String
+  categories: [Category] @connection(keyName: "byRestaurant", fields: ["id"])
+}
+
+type Category 
+  @model 
+  @auth(
+    rules: [
+      {allow: owner},
+      {allow: public, operations: [read]}
+    ]) 
+  @key(name: "byRestaurant", fields: ["restaurantID", "name"]) {
+  id: ID!
+  restaurantID: ID!
+  name: String!
+  items: [Item] @connection(keyName: "byCategory", fields: ["id"])
+}
+
+type Item 
+  @model 
+  @auth(
+    rules: [
+      {allow: owner},
+      {allow: public, operations: [read]}
+    ]) 
+  @key(name: "byCategory", fields: ["categoryID", "name"]) {
+  id: ID!
+  categoryID: ID!
+  name: String!
+  description: String!
+  ingredients: String!
+  price: String!
+  image: String!
+  vegan: Boolean!
+  vege: Boolean!
+  halal: Boolean!
+  featured: Boolean!
+  hidden: Boolean!
 }

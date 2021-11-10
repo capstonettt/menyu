@@ -1,7 +1,36 @@
-type Restrant @aws_api_key @aws_cognito_user_pools {
+type Restaurant @aws_api_key @aws_cognito_user_pools {
   id: ID!
   name: String!
-  image: String
+  logo: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+  categories(name: ModelStringKeyConditionInput, filter: ModelCategoryFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCategoryConnection @aws_api_key @aws_cognito_user_pools
+}
+
+type Category @aws_api_key @aws_cognito_user_pools {
+  id: ID!
+  restaurantID: ID!
+  name: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  owner: String
+  items(name: ModelStringKeyConditionInput, filter: ModelItemFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelItemConnection @aws_api_key @aws_cognito_user_pools
+}
+
+type Item @aws_api_key @aws_cognito_user_pools {
+  id: ID!
+  categoryID: ID!
+  name: String!
+  description: String!
+  ingredients: String!
+  price: String!
+  image: String!
+  vegan: Boolean!
+  vege: Boolean!
+  halal: Boolean!
+  featured: Boolean!
+  hidden: Boolean!
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
   owner: String
@@ -12,8 +41,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelRestrantConnection @aws_api_key @aws_cognito_user_pools {
-  items: [Restrant]
+type ModelRestaurantConnection @aws_api_key @aws_cognito_user_pools {
+  items: [Restaurant]
   nextToken: String
 }
 
@@ -90,13 +119,13 @@ input ModelSizeInput {
   between: [Int]
 }
 
-input ModelRestrantFilterInput {
+input ModelRestaurantFilterInput {
   id: ModelIDInput
   name: ModelStringInput
-  image: ModelStringInput
-  and: [ModelRestrantFilterInput]
-  or: [ModelRestrantFilterInput]
-  not: ModelRestrantFilterInput
+  logo: ModelStringInput
+  and: [ModelRestaurantFilterInput]
+  or: [ModelRestaurantFilterInput]
+  not: ModelRestaurantFilterInput
 }
 
 enum ModelAttributeTypes {
@@ -113,42 +142,180 @@ enum ModelAttributeTypes {
 }
 
 type Query {
-  getRestrant(id: ID!): Restrant @aws_api_key @aws_cognito_user_pools
-  listRestrants(filter: ModelRestrantFilterInput, limit: Int, nextToken: String): ModelRestrantConnection @aws_api_key @aws_cognito_user_pools
+  getRestaurant(id: ID!): Restaurant @aws_api_key @aws_cognito_user_pools
+  listRestaurants(filter: ModelRestaurantFilterInput, limit: Int, nextToken: String): ModelRestaurantConnection @aws_api_key @aws_cognito_user_pools
+  getCategory(id: ID!): Category @aws_api_key @aws_cognito_user_pools
+  listCategorys(filter: ModelCategoryFilterInput, limit: Int, nextToken: String): ModelCategoryConnection @aws_api_key @aws_cognito_user_pools
+  getItem(id: ID!): Item @aws_api_key @aws_cognito_user_pools
+  listItems(filter: ModelItemFilterInput, limit: Int, nextToken: String): ModelItemConnection @aws_api_key @aws_cognito_user_pools
 }
 
-input CreateRestrantInput {
+input CreateRestaurantInput {
   id: ID
   name: String!
-  image: String
+  logo: String
 }
 
-input UpdateRestrantInput {
+input UpdateRestaurantInput {
   id: ID!
   name: String
-  image: String
+  logo: String
 }
 
-input DeleteRestrantInput {
+input DeleteRestaurantInput {
   id: ID!
 }
 
 type Mutation {
-  createRestrant(input: CreateRestrantInput!, condition: ModelRestrantConditionInput): Restrant
-  updateRestrant(input: UpdateRestrantInput!, condition: ModelRestrantConditionInput): Restrant
-  deleteRestrant(input: DeleteRestrantInput!, condition: ModelRestrantConditionInput): Restrant
+  createRestaurant(input: CreateRestaurantInput!, condition: ModelRestaurantConditionInput): Restaurant
+  updateRestaurant(input: UpdateRestaurantInput!, condition: ModelRestaurantConditionInput): Restaurant
+  deleteRestaurant(input: DeleteRestaurantInput!, condition: ModelRestaurantConditionInput): Restaurant
+  createCategory(input: CreateCategoryInput!, condition: ModelCategoryConditionInput): Category
+  updateCategory(input: UpdateCategoryInput!, condition: ModelCategoryConditionInput): Category
+  deleteCategory(input: DeleteCategoryInput!, condition: ModelCategoryConditionInput): Category
+  createItem(input: CreateItemInput!, condition: ModelItemConditionInput): Item
+  updateItem(input: UpdateItemInput!, condition: ModelItemConditionInput): Item
+  deleteItem(input: DeleteItemInput!, condition: ModelItemConditionInput): Item
 }
 
-input ModelRestrantConditionInput {
+input ModelRestaurantConditionInput {
   name: ModelStringInput
-  image: ModelStringInput
-  and: [ModelRestrantConditionInput]
-  or: [ModelRestrantConditionInput]
-  not: ModelRestrantConditionInput
+  logo: ModelStringInput
+  and: [ModelRestaurantConditionInput]
+  or: [ModelRestaurantConditionInput]
+  not: ModelRestaurantConditionInput
 }
 
 type Subscription {
-  onCreateRestrant(owner: String): Restrant @aws_subscribe(mutations: ["createRestrant"]) @aws_api_key @aws_cognito_user_pools
-  onUpdateRestrant(owner: String): Restrant @aws_subscribe(mutations: ["updateRestrant"]) @aws_api_key @aws_cognito_user_pools
-  onDeleteRestrant(owner: String): Restrant @aws_subscribe(mutations: ["deleteRestrant"]) @aws_api_key @aws_cognito_user_pools
+  onCreateRestaurant(owner: String): Restaurant @aws_subscribe(mutations: ["createRestaurant"]) @aws_api_key @aws_cognito_user_pools
+  onUpdateRestaurant(owner: String): Restaurant @aws_subscribe(mutations: ["updateRestaurant"]) @aws_api_key @aws_cognito_user_pools
+  onDeleteRestaurant(owner: String): Restaurant @aws_subscribe(mutations: ["deleteRestaurant"]) @aws_api_key @aws_cognito_user_pools
+  onCreateCategory(owner: String): Category @aws_subscribe(mutations: ["createCategory"]) @aws_api_key @aws_cognito_user_pools
+  onUpdateCategory(owner: String): Category @aws_subscribe(mutations: ["updateCategory"]) @aws_api_key @aws_cognito_user_pools
+  onDeleteCategory(owner: String): Category @aws_subscribe(mutations: ["deleteCategory"]) @aws_api_key @aws_cognito_user_pools
+  onCreateItem(owner: String): Item @aws_subscribe(mutations: ["createItem"]) @aws_api_key @aws_cognito_user_pools
+  onUpdateItem(owner: String): Item @aws_subscribe(mutations: ["updateItem"]) @aws_api_key @aws_cognito_user_pools
+  onDeleteItem(owner: String): Item @aws_subscribe(mutations: ["deleteItem"]) @aws_api_key @aws_cognito_user_pools
+}
+
+type ModelCategoryConnection @aws_api_key @aws_cognito_user_pools {
+  items: [Category]
+  nextToken: String
+}
+
+input ModelCategoryFilterInput {
+  id: ModelIDInput
+  restaurantID: ModelIDInput
+  name: ModelStringInput
+  and: [ModelCategoryFilterInput]
+  or: [ModelCategoryFilterInput]
+  not: ModelCategoryFilterInput
+}
+
+input CreateCategoryInput {
+  id: ID
+  restaurantID: ID!
+  name: String!
+}
+
+input UpdateCategoryInput {
+  id: ID!
+  restaurantID: ID
+  name: String
+}
+
+input DeleteCategoryInput {
+  id: ID!
+}
+
+input ModelCategoryConditionInput {
+  restaurantID: ModelIDInput
+  name: ModelStringInput
+  and: [ModelCategoryConditionInput]
+  or: [ModelCategoryConditionInput]
+  not: ModelCategoryConditionInput
+}
+
+type ModelItemConnection @aws_api_key @aws_cognito_user_pools {
+  items: [Item]
+  nextToken: String
+}
+
+input ModelItemFilterInput {
+  id: ModelIDInput
+  categoryID: ModelIDInput
+  name: ModelStringInput
+  description: ModelStringInput
+  ingredients: ModelStringInput
+  price: ModelStringInput
+  image: ModelStringInput
+  vegan: ModelBooleanInput
+  vege: ModelBooleanInput
+  halal: ModelBooleanInput
+  featured: ModelBooleanInput
+  hidden: ModelBooleanInput
+  and: [ModelItemFilterInput]
+  or: [ModelItemFilterInput]
+  not: ModelItemFilterInput
+}
+
+input CreateItemInput {
+  id: ID
+  categoryID: ID!
+  name: String!
+  description: String!
+  ingredients: String!
+  price: String!
+  image: String!
+  vegan: Boolean!
+  vege: Boolean!
+  halal: Boolean!
+  featured: Boolean!
+  hidden: Boolean!
+}
+
+input UpdateItemInput {
+  id: ID!
+  categoryID: ID
+  name: String
+  description: String
+  ingredients: String
+  price: String
+  image: String
+  vegan: Boolean
+  vege: Boolean
+  halal: Boolean
+  featured: Boolean
+  hidden: Boolean
+}
+
+input DeleteItemInput {
+  id: ID!
+}
+
+input ModelItemConditionInput {
+  categoryID: ModelIDInput
+  name: ModelStringInput
+  description: ModelStringInput
+  ingredients: ModelStringInput
+  price: ModelStringInput
+  image: ModelStringInput
+  vegan: ModelBooleanInput
+  vege: ModelBooleanInput
+  halal: ModelBooleanInput
+  featured: ModelBooleanInput
+  hidden: ModelBooleanInput
+  and: [ModelItemConditionInput]
+  or: [ModelItemConditionInput]
+  not: ModelItemConditionInput
+}
+
+input ModelStringKeyConditionInput {
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  between: [String]
+  beginsWith: String
 }

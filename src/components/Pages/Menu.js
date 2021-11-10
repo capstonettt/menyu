@@ -5,9 +5,8 @@ import { useState, useEffect } from 'react';
 import API from '@aws-amplify/api';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 
-import { getRestrant } from '../../graphql/queries';
-
 const Menu = () => {
+    /*
     const params = useParams();
 
     const [restrantLogo, setRestrantLogo] = useState(null);
@@ -34,10 +33,10 @@ const Menu = () => {
 
     console.log(params.restrantId);
 
+    */
     return (
         <div>
             hello this is menu
-            <img src={restrantLogo}></img>
         </div>
     )
 }

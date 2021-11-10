@@ -1,14 +1,19 @@
 import React from 'react';
 
 import classes from './Footer.module.css';
+import MenyuButton from './MenyuButton';
 
 const Footer = () => {
+    const menyuButtonClickHandler = () => {
+        // do nothing
+    }
+
     return (
         <div className={classes.body}>
             <div className={classes.text}>Got any questions?</div>
             <button className={classes.contactButton}>Contact us</button>
             <div className={classes.buttons}>
-                <button className={classes.menyuButton}>MENYU</button>
+                <MenyuButton classes={classes.menyuButton} onClickHandler={menyuButtonClickHandler} />
                 <button className={classes.aboutButton}>About</button>
             </div>
             <hr color="#FFDA9D" className={classes.line}></hr>

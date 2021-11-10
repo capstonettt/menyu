@@ -1,15 +1,73 @@
 import React, { useEffect, useState } from 'react';
 
-import { listRestrants } from '../../graphql/queries';
-import { createRestrant } from '../../graphql/mutations';
-import { AmplifySignOut } from '@aws-amplify/ui-react';
+import { listRestaurants } from '../../graphql/queries';
+import { getRestaurant } from '../../graphql/queries';
 
-import Storage from '@aws-amplify/storage';
 import { API } from '@aws-amplify/api';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 
 import {v4 as uuid} from 'uuid';
 
+import classes from './Home.module.css'
+import HomeHeader from '../Layout/HomeHeader';
+import Footer from '../Layout/Footer';
+
+
+import CreateRestaurant from '../Layout/CreateRestaurant';
+import EditMenu from '../Layout/EditMenu';
+import EditRestaurant from '../Layout/EditRestaurant';
+
+const Home = (props) => {
+    const bucket = props.bucket_info.bucket_name;
+    const region = props.bucket_info.bucket_region;
+
+    const [restaurant, setRestaurant] = useState({id: '', name: '', logo: '', categories: {items: []}});
+
+    console.log('rendering Home');
+
+    useEffect(() => {
+        console.log("useEffect of Home called")
+        fetchRestaurants()
+    }, [])
+
+    async function fetchRestaurants() {
+        try {
+          const restrantsData = await API.graphql(graphqlOperation(listRestaurants))
+          const restrants = restrantsData.data.listRestaurants.items
+          const restrantByGetData = await API.graphql(graphqlOperation(getRestaurant, {id: restrants[0].id}));
+          console.log("Restaurant by Get", restrantByGetData);
+          console.log('restrant id:', restrants[0].id)
+          console.log("from fetchRestrant");
+          console.log(restrants);
+          setRestaurant(restrantByGetData.data.getRestaurant);
+        } catch (err) {
+            console.log('error fetching restrants', err);
+            setRestaurant(null);
+        }
+    }
+
+    return (
+        <div className={classes.container}>
+            <HomeHeader />
+            <div>Hello, {props.user.username}</div>
+            {
+                (restaurant) ? (
+                    <div>
+                        <EditRestaurant bucket={bucket} region={region} restaurant={restaurant} restaurantSetter={setRestaurant}/>
+                        <EditMenu bucket={bucket} region={region} restaurant={restaurant} restaurantSetter={setRestaurant} />
+                    </div>
+                ) : (
+                    <CreateRestaurant bucket={bucket} region={region} restaurantSetter={setRestaurant}/>
+                )
+            }
+            <Footer />
+        </div>
+    );
+}
+
+export default Home;
+
+/*
 const Home = (props) => {
     const [nameState, setNameState] = useState('');
     const [selectedLogo, setSelectedLogo] = useState(null);
@@ -31,30 +89,9 @@ const Home = (props) => {
           console.log("from fetchRestrant");
           console.log(restrants);
           setRestrants(restrants);
-          /*
-          const restrantsState = await Promise.all(restrants.map(async (restrant) => {
-              return {
-                  id: restrant.id,
-                  name: restrant.name,
-                  logoUrl: logoUrl
-              }
-          }));
-          console.log(restrantsState);
-          setRestrants(restrantsState)
-          */
         } catch (err) { console.log('error fetching restrants') }
     }
 
-    /*
-    async function fetchLogoUrl(bucket, region, key) {
-        try {
-            
-        } catch (err) { console.log('error fetching images ')}
-        const [, , keyWithoutPrefix] = /([^/]+\/){2}(.*)$/.exec(key) || key;
-        
-        const url = await Storage.get(keyWithoutPrefix, {bucket, region, })
-    }
-    */
 
 
     async function addRestrantHandler() {
@@ -76,37 +113,6 @@ const Home = (props) => {
                 return [...restrants, {name: nameState, image: url}]
             })
 
-            /*
-            let file;
-
-            const { name, type: mimeType } = selectedLogo;
-            const [, , , extension] = /([^.]+)(\.(\w+))?$/.exec(name);
-
-            const bucket = props.bucket_info.bucket_name;
-            const region = props.bucket_info.bucket_region;
-            const visibility = 'public';
-            const { identityId } = await Auth.currentCredentials();
-
-            const key = `${visibility}/${identityId}/${uuid()}${extension && '.'}${extension}`;
-
-            file = {
-                bucket,
-                key,
-                region,
-                mimeType,
-                localUri: selectedLogo,
-            };
-
-            await props.client.mutate({
-                mutation: gql(createRestrant),
-                variables: {
-                    input: {
-                        name: nameState,
-                        logo: file,
-                    }
-                }
-            })
-            */
         } catch (err) {
             console.log('error creating restrants:', err);
         }
@@ -146,5 +152,4 @@ const Home = (props) => {
         </div>
     );
 }
-
-export default Home;
+*/
