@@ -130,7 +130,11 @@ const App = () => {
               }}
             >
               {!inAuthProcess && <Welcome />}
-              {inAuthProcess && <AuthPage isSigningUp={isSigningUp} onResetAuthState={resetAuthState}/>}
+              {inAuthProcess && 
+                <AmplifyAuthenticator 
+                  initialAuthState={isSigningUp ? AuthState.SignUp : AuthState.SignIn }
+                ></AmplifyAuthenticator>
+              }
             </AuthProcessContext.Provider>
           )
         }
@@ -143,3 +147,5 @@ const App = () => {
 }
 
 export default App
+
+              //{inAuthProcess && <AuthPage isSigningUp={isSigningUp} onResetAuthState={resetAuthState}/>}
