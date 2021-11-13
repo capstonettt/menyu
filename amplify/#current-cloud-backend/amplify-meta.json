@@ -38,7 +38,7 @@
         "GraphQLAPIEndpointOutput": "https://fdd22jih25hohermvqyp6v3xxu.appsync-api.us-east-2.amazonaws.com/graphql",
         "GraphQLAPIKeyOutput": "da2-jjjfpm3rfnadbisvdt7zkdog6e"
       },
-      "lastPushTimeStamp": "2021-11-07T20:14:31.236Z",
+      "lastPushTimeStamp": "2021-11-13T22:43:53.299Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-menyu-dev-130759-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apitestapi"
@@ -80,11 +80,12 @@
         "IdentityPoolName": "menyu621800e5_identitypool_621800e5__dev",
         "UserPoolName": "menyu621800e5_userpool_621800e5"
       },
-      "lastPushTimeStamp": "2021-11-07T20:14:30.826Z",
+      "lastPushTimeStamp": "2021-11-13T22:43:53.299Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-menyu-dev-130759-deployment/amplify-cfn-templates/auth/menyu621800e5-cloudformation-template.yml",
         "logicalId": "authmenyu621800e5"
-      }
+      },
+      "lastPushDirHash": "xTmGADWVME/QXoSuwiF/guwxY08="
     }
   },
   "storage": {
@@ -95,11 +96,12 @@
         "BucketName": "logosbucket130759-dev",
         "Region": "us-east-2"
       },
-      "lastPushTimeStamp": "2021-11-07T20:14:30.828Z",
+      "lastPushTimeStamp": "2021-11-13T22:43:53.299Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-menyu-dev-130759-deployment/amplify-cfn-templates/storage/s3-cloudformation-template.json",
         "logicalId": "storagelogos"
-      }
+      },
+      "lastPushDirHash": "ss47osGTTWFfY1i0q1xhTet2D1s="
     }
   }
 }

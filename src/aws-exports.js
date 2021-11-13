@@ -12,9 +12,8 @@ const awsmobile = {
     "aws_user_pools_id": "us-east-2_9JRP32d0q",
     "aws_user_pools_web_client_id": "1a86ps8tkqae61vobag21ql3j4",
     "oauth": {},
-    "aws_cognito_login_mechanisms": [
-        "PREFERRED_USERNAME"
-    ],
+    "aws_cognito_username_attributes": [],
+    "aws_cognito_social_providers": [],
     "aws_cognito_signup_attributes": [
         "EMAIL"
     ],
@@ -30,7 +29,10 @@ const awsmobile = {
         "EMAIL"
     ],
     "aws_user_files_s3_bucket": "logosbucket130759-dev",
-    "aws_user_files_s3_bucket_region": "us-east-2"
+    "aws_user_files_s3_bucket_region": "us-east-2",
+    "aws_cognito_login_mechanisms": [
+        "PREFERRED_USERNAME"
+    ]
 };
 
 
