@@ -35,7 +35,7 @@ const CreateRestaurant = (props) => {
         try {
             await Storage.put(key, logo, {contentType: mimeType});
             const newRestaurant = await API.graphql(graphqlOperation(createRestaurant, { input: inputData }))
-            props.restaurantSetter({id: newRestaurant.data.createRestaurant.id, name: name, logo: url});
+            props.restaurantSetter({id: newRestaurant.data.createRestaurant.id, name: name, logo: url, categories: {item: []}});
             console.log('addRestaurantHandler: newly created restaurant:' , newRestaurant);
             console.log('addRestaurantHandler: newly created restaurant:' , newRestaurant.data.createRestaurant.id);
         } catch (err) {
