@@ -18,15 +18,12 @@ import EditMenu from '../Layout/EditMenu';
 import EditRestaurant from '../Layout/EditRestaurant';
 
 const Home = (props) => {
-    /*
     const bucket = props.bucket_info.bucket_name;
     const region = props.bucket_info.bucket_region;
 
     const [restaurant, setRestaurant] = useState({id: '', name: '', logo: '', categories: {items: []}});
-    */
 
     console.log('rendering Home');
-    /*
 
     useEffect(() => {
         console.log("useEffect of Home called")
@@ -48,10 +45,10 @@ const Home = (props) => {
             setRestaurant(null);
         }
     }
-    */
     return (
         <div>
             hello {props.user.username}
+            
         </div>
     )
     /*
