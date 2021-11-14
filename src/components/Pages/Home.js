@@ -49,6 +49,7 @@ const Home = (props) => {
         <div className={classes.container}>
             <HomeHeader />
             <div>Hello, {props.user.username}</div>
+            <CreateRestaurant bucket={bucket} region={region} restaurantSetter={setRestaurant}/>
         </div>
     )
     /*
