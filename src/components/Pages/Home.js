@@ -46,9 +46,9 @@ const Home = (props) => {
         }
     }
     return (
-        <div>
-            hello {props.user.username}
-            
+        <div className={classes.container}>
+            <HomeHeader />
+            <div>Hello, {props.user.username}</div>
         </div>
     )
     /*
