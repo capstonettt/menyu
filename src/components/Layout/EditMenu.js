@@ -313,7 +313,7 @@ const EditMenu = (props) => {
                 <div>
                     <div className={classes.backdrop} onClick={onQRCodeClosed} />
                     <div className={classes.qrCodeContainer}>
-                        <img src={qrCodeURLBase + 'new-feature.d1ac5hakempkoy.amplifyapp.com' + props.restaurant.id}></img>
+                        <img src={qrCodeURLBase + 'https://new-feature.d1ac5hakempkoy.amplifyapp.com/menu/' + props.restaurant.id}></img>
                     </div>
                 </div>
 
