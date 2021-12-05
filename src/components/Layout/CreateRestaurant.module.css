@@ -1,0 +1,50 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    padding-left: 15vw;
+    margin-top: 10vh;
+    margin-bottom: 20vh;
+}
+.nameArea{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.logoArea{
+    display: flex;
+    flex-direction: row;
+   align-items: center;
+}
+.input{
+    margin-left: 3vw;
+    width: 20em;
+    /* border-style: solid;
+    border-color: #6B2200; */
+    
+}
+.button{
+    margin-top: 3vh;
+    margin-left: 23vw;
+    width: 10em;
+    height: 4vh;
+    border-style: solid;
+    border-radius: 100vh;
+    background: #6B2200;
+    border: none;
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+}
+.defaltText{
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    color: #6B2200;
+}
+.titleText{
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    color: #6B2200;
+}

@@ -5,6 +5,7 @@ import Storage from '@aws-amplify/storage';
 import API from '@aws-amplify/api';
 import { graphqlOperation } from '@aws-amplify/api-graphql';
 import { createRestaurant } from '../../graphql/mutations';
+import classes from './CreateRestaurant.module.css';
 
 import { v4 as uuid } from 'uuid';
 
@@ -35,7 +36,7 @@ const CreateRestaurant = (props) => {
         try {
             await Storage.put(key, logo, {contentType: mimeType});
             const newRestaurant = await API.graphql(graphqlOperation(createRestaurant, { input: inputData }))
-            props.restaurantSetter({id: newRestaurant.data.createRestaurant.id, name: name, logo: url, categories: {item: []}});
+            props.restaurantSetter({id: newRestaurant.data.createRestaurant.id, name: name, logo: url});
             console.log('addRestaurantHandler: newly created restaurant:' , newRestaurant);
             console.log('addRestaurantHandler: newly created restaurant:' , newRestaurant.data.createRestaurant.id);
         } catch (err) {
@@ -44,17 +45,17 @@ const CreateRestaurant = (props) => {
     }
     
     return (
-        <div>
-            Create your Restaurant
-            <div>
-                Restaurant Name:
-                <input type='text' value={name} onChange={nameChangeHandler}/>
+        <div className={classes.content}>
+            <p className={classes.titleText}>Create your Restaurant</p>
+            <div className={classes.nameArea}>
+                <p className={classes.defaltText}>Restaurant Name:</p>
+                <input className={classes.input} type='text' value={name} onChange={nameChangeHandler}/>
             </div>
-            <div>
-                Restaurant Logo:
-                <input type='file' onChange={logoChangeHandler} accept="image/png, image/jpeg"/>
+            <div className={classes.logoArea}>
+                <p className={classes.defaltText}>Restaurant Logo:</p>
+                <input className={classes.input} type='file' onChange={logoChangeHandler} accept="image/png, image/jpeg"/>
             </div>
-            <button onClick={addRestaurantHandler}>Add Restrant</button>
+            <button className={classes.button} onClick={addRestaurantHandler}>Add Restrant</button>
         </div>
 
     );

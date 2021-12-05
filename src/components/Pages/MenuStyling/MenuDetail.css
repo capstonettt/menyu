@@ -1,0 +1,83 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: transparent;
+}
+
+.menu-detail-container-wrapper {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 11;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-detail-container {
+  z-index: 100;
+  overflow: hidden;
+
+  width: 330px;
+  height: 620px;
+
+  background-color: #f4f1e4;
+  box-shadow: 0px 0px 32px rgba(72, 88, 104, 0.47);
+  border-radius: 30px;
+}
+
+.menu-detail-close-btn {
+  position: relative;
+  left: 290px;
+  top: 14px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 200px;
+  height: 0px;
+  margin: 0 auto;
+  border-radius: 20px;
+
+  top: -173px;
+
+  z-index: 30;
+}
+
+.image-wrapper img {
+  width: 200px;
+  height: 200px;
+
+  border-radius: 20px;
+  z-index: 30;
+}
+
+.menu-detail-content-container {
+  position: relative;
+  top: 176px;
+  left: 0px;
+  width: 330px;
+  height: 416px;
+
+  background: #fffcf1;
+  box-shadow: 0px 4px 24px rgba(72, 88, 104, 0.47);
+  border-radius: 30px;
+}
+
+.menu-detail-content-wrapper {
+  position: relative;
+  top: 36px;
+  width: 280px;
+  height: 365px;
+
+  margin: 0 auto;
+
+  overflow-y: scroll;
+}

@@ -21,8 +21,7 @@ const Home = (props) => {
     const bucket = props.bucket_info.bucket_name;
     const region = props.bucket_info.bucket_region;
 
-    //const [restaurant, setRestaurant] = useState({id: '', name: '', logo: '', categories: {items: []}});
-    const [restaurant, setRestaurant] = useState(null);
+    const [restaurant, setRestaurant] = useState({id: '', name: '', logo: '', categories: {items: []}});
 
     console.log('rendering Home');
 
@@ -46,29 +45,11 @@ const Home = (props) => {
             setRestaurant(null);
         }
     }
-    return (
-        <div className={classes.container}>
-            <HomeHeader />
-            <div>Hello, {props.user.username}</div>
-            {
-                (restaurant) ? (
-                    <div>
-                        <EditRestaurant bucket={bucket} region={region} restaurant={restaurant} restaurantSetter={setRestaurant}/>
-                        <EditMenu bucket={bucket} region={region} restaurant={restaurant} restaurantSetter={setRestaurant} />
-                    </div>
-                ) : (
-                    <CreateRestaurant bucket={bucket} region={region} restaurantSetter={setRestaurant}/>
-                )
-            }
-            <Footer />
-        </div>
-    )
-    /*
 
     return (
         <div className={classes.container}>
             <HomeHeader />
-            <div>Hello, {props.user.username}</div>
+            {/* <div>Hello, {props.user.username}</div> */}
             {
                 (restaurant) ? (
                     <div>
@@ -82,7 +63,6 @@ const Home = (props) => {
             <Footer />
         </div>
     );
-    */
 }
 
 export default Home;

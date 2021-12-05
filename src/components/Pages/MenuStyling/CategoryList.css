@@ -1,0 +1,10 @@
+.category-list-wrapper {
+  margin: 0 auto;
+  width: 350px;
+}
+
+.category-list {
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+}

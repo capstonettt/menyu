@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react/cjs/react.development';
 
 import Storage from '@aws-amplify/storage';
 import API from '@aws-amplify/api';
@@ -8,9 +8,13 @@ import { createCategory } from '../../graphql/mutations';
 import { createItem } from '../../graphql/mutations';
 import { deleteItem } from '../../graphql/mutations';
 import { updateItem } from '../../graphql/mutations';
+import image from '../../assets/images/delete.png';
+import image2 from '../../assets/images/edit.png';
+import image3 from '../../assets/images/hide.png';
 
 import classes from './EditMenu.module.css';
 import { v4 as uuid } from 'uuid';
+
 
 const EditMenu = (props) => {
     // props = [bucket, region, restaurant, restaurantSetter]
@@ -294,14 +298,14 @@ const EditMenu = (props) => {
     const onQRCodeClosed = () => {
         setQRCodeViewerOpened(false);
     }
-
+        
     return (
-        <div>
+        <div className={classes.editMenu}>
             {loadingMessage && (
                 <div>
                     <div className={classes.backdrop}/>
                     <div className={classes.loading}>
-                        <p>{loadingMessage}</p>
+                        <p className={classes.loadingText}>{loadingMessage}</p>
                     </div>
                 </div>
             )}
@@ -314,182 +318,233 @@ const EditMenu = (props) => {
                 </div>
 
             )}
-            <div>
+            { <div>
                 <button onClick={onQRCodeRequested}>QR Code</button>
-            </div>
-            <p>Your Menu</p>
-            <div>
-                <div>
-                    {categoryAdderOpened && (
+            </div> }
+            <div className={classes.content}>
+                <div className={classes.mainText}>
+                    Your Menu
+                </div>
+                <div className={classes.editArea}>
+                    <div className={classes.categoryArea}>
+                        {categoryAdderOpened && (
+                            <div>
+                                <div className={classes.backdrop} onClick={onAddCategoryCancel} />
+                                <div className={classes.editorContainer}>
+                                    <div className={classes.editorText}>Category Name: </div>
+                                    <div className={classes.editorInputArea}>
+                                        <input className={classes.editorInput} type='text' onChange={(e) => {setCategoryName(e.target.value)}} />
+                                        <button className={classes.editorConfirmButton} onClick={onAddCategoryConfirm}>Confirm</button>
+                                        <button className={classes.editorCancelButton} onClick={onAddCategoryCancel}>Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                        <div className={classes.Ctext}>
+                            Categories
+                        </div>
+                        <div className={classes.Citems}>
+                        {
+                            (props.restaurant.categories.items) && (
+                                (props.restaurant.categories.items.length > 0) ? (
+                                    props.restaurant.categories.items.map((category, index) => (
+                                        <div className={classes.eachItem} key={category.id ? category.id : index}>
+                                            {(currentCategory)&&(currentCategory.name==category.name)?
+                                            <button className={classes.selectedbutton} onClick={() => setCurrentCategory({id: category.id, name: category.name})}>{category.name}</button>
+                                            :<button className={classes.button} onClick={() => setCurrentCategory({id: category.id, name: category.name})}>{category.name}</button>}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className={classes.defaltText}>Add Your Restaurant Menu Category!</p>
+                                )
+                            )
+                        }
+                        </div>
+                        <div className={classes.buttonSection}>
+                            <button className={classes.Cbutton} onClick={AddCategoryHandler}>+ Add</button>
+                        </div>
+                    </div>
+                    {deleteModalOpened && (
                         <div>
-                            <div className={classes.backdrop} onClick={onAddCategoryCancel} />
-                            <div className={classes.editorContainer}>
-                                Category Name: <input type='text' onChange={(e) => {setCategoryName(e.target.value)}} />
-                                <button onClick={onAddCategoryConfirm}>Confirm</button>
-                                <button onClick={onAddCategoryCancel}>Cancel</button>
+                            <div className={classes.backdrop} onClick={onDeleteItemCanceled} />
+                            <div className={classes.deleteModalContainer}>
+                                <div className={classes.editorDeleteText}>Do you want to delete this?</div>
+                                <button  className={classes.editorYesButton} onClick={onDeleteItemConfirmed}>Yes</button>
+                                <button className={classes.editorNoButton} onClick={onDeleteItemCanceled}>No</button>
                             </div>
                         </div>
                     )}
-                    <p>Categories</p>
-                    {
-                        (props.restaurant.categories.items) && (
-                            (props.restaurant.categories.items.length > 0) ? (
-                                props.restaurant.categories.items.map((category, index) => (
-                                    <div key={category.id ? category.id : index}>
-                                        <button onClick={() => setCurrentCategory({id: category.id, name: category.name})}>{category.name}</button>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>Add Your Restaurant Menu Category!</p>
-                            )
-                        )
-                    }
-                    <button onClick={AddCategoryHandler}>+ Add</button>
-                </div>
-                {deleteModalOpened && (
-                    <div>
-                        <div className={classes.backdrop} onClick={onDeleteItemCanceled} />
-                        <div className={classes.deleteModalContainer}>
-                            <p>You Sure?</p>
-                            <button onClick={onDeleteItemConfirmed}>Confirm</button>
-                            <button onClick={onDeleteItemCanceled}>Cancel</button>
-                        </div>
-                    </div>
-                )}
-                {itemEditorOpened && (
-                    <div>
-                        <div className={classes.backdrop} onClick={onEditItemCanceled} />
-                        <div className={classes.editorContainer}>
-                            <p>Edit an Item</p>
-                            <div>Name: <input type='text' placeholder={itemToBeEditted.name} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, name: e.target.value}})}} /></div>
-                            <div>Description: <input type='text' placeholder={itemToBeEditted.description} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, description: e.target.value}})}} /></div>
-                            <div>Ingredients: <input type='text' placeholder={itemToBeEditted.ingredients} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, ingredients: e.target.value}})}} /></div>
-                            <div>Price: <input type='text' placeholder={itemToBeEditted.price} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, price: e.target.value}})}} /></div>
-                            <div>Image: <input type='file' onChange={(e) => {setItemImage(e.target.files[0])}} /></div>
-                            <div>
-                                <input type="checkbox" id="vege" checked={itemToBeEditted.vege} onClick={
-                                    (e) => {setItemToBeEditted((prev) => {return {...prev, vege: e.target.checked}})}
-                                    } />
-                                <label for="vege">vegetarian</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="vegan" checked={itemToBeEditted.vegan} onClick={
-                                    (e) => {setItemToBeEditted((prev) => {return {...prev, vegan: e.target.checked}})}
-                                    } />
-                                <label for="vegan">vegan</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="halal" checked={itemToBeEditted.halal} onClick={
-                                    (e) => {setItemToBeEditted((prev) => {return {...prev, halal: e.target.checked}})}
-                                    } />
-                                <label for="halal">halal</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" id="featured" checked={itemToBeEditted.featured} onClick={
-                                    (e) => {setItemToBeEditted((prev) => {return {...prev, featured: e.target.checked}})}
-                                    } />
-                                <label for="featured">featured</label>
-                            </div>
-                            <button onClick={onEditItemConfirmed}>Save</button>
-                            <button onClick={onEditItemCanceled}>Cancel</button>
-                        </div>
-                    </div>
-                )}
-
-                {
-                    (currentCategory) ? (
+                    {itemEditorOpened && (
                         <div>
-                            <p>currentCategory: {currentCategory.name} </p>
-                            <div>
-                                <p>Items</p>
-                                <div>
-                                    {
-                                        props.restaurant.categories.items.filter((category) => {
-                                            return category.id === currentCategory.id
-                                        }).map((category, index) => {
-                                            return category.items.items.map((item, index) => {
-                                                if (!(item.hidden)) {
-                                                    return (
-                                                        <div key={item.id ? item.id : index}>
-                                                            <img src={item.image}></img>
-                                                            <p>{item.name}</p>
-                                                            <button onClick={() => onDeleteButtonClicked(item)}>delete</button>
-                                                            <button onClick={() => onEditItemButtonClicked(item)}>edit</button>
-                                                            <button onClick={async() => await onHideButtonClicked(item)}>hide from menu</button>
-                                                        </div>
-                                                    )
-                                                }
-                                            }) 
-                                        })
-                                    }
-                                </div>
-                                <div>
-                                    {
-                                        props.restaurant.categories.items.filter((category) => {
-                                            return category.id === currentCategory.id
-                                        }).map((category, index) => {
-                                            return category.items.items.map((item, index) => {
-                                                if (item.hidden) {
-                                                    return (
-                                                        <div key={item.id ? item.id : index}>
-                                                            <img src={item.image}></img>
-                                                            <p>{item.name}</p>
-                                                            <button onClick={() => onDeleteButtonClicked(item)}>delete</button>
-                                                            <button onClick={() => onEditItemButtonClicked(item)}>edit</button>
-                                                            <button onClick={async() => await onRevealButtonClicked(item)}>reveal to menu</button>
-                                                        </div>
-                                                    )
-                                                }
-                                            }) 
-                                        })
-                                    }
-                                </div>
-                                {itemAdderOpened && (
-                                    <div>
-                                        <div className={classes.backdrop} onClick={onAddItemCancel} />
-                                        <div className={classes.editorContainer}>
-                                            <p> Add a new Item </p>
-                                            <div>Name: <input type='text' onChange={(e) => {setItemName(e.target.value)}} /></div>
-                                            <div>Description: <input type='text' onChange={(e) => {setItemDescription(e.target.value)}} /></div>
-                                            <div>Ingredients: <input type='text' onChange={(e) => {setItemIngredients(e.target.value)}} /></div>
-                                            <div>price: $<input type='text' onChange={(e) => {setItemPrice(e.target.value)}} /></div>
-                                            <div>Image: <input type='file' onChange={(e) => {setItemImage(e.target.files[0])}} /></div>
-                                            <div>
-                                                <input type="checkbox" id="vege" onClick={
-                                                    (e) => {setItemSpecilities((prev) => {return {...prev, vege: e.target.checked}})}
-                                                    } />
-                                                <label for="vege">vegetarian</label>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" id="vegan" onClick={
-                                                    (e) => {setItemSpecilities((prev) => {return {...prev, vegan: e.target.checked}})}
-                                                    } />
-                                                <label for="vegan">vegan</label>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" id="halal" onClick={
-                                                    (e) => {setItemSpecilities((prev) => {return {...prev, halal: e.target.checked}})}
-                                                    } />
-                                                <label for="halal">halal</label>
-                                            </div>
-                                            <div>
-                                                <input type="checkbox" id="featured" onClick={
-                                                    (e) => {setItemSpecilities((prev) => {return {...prev, featured: e.target.checked}})}
-                                                    } />
-                                                <label for="featured">featured</label>
-                                            </div>
-                                            <button onClick={onAddItemConfirm}>Save</button>
-                                            <button onClick={onAddItemCancel}>Cancel</button>
+                            <div className={classes.backdrop} onClick={onEditItemCanceled} />
+                            <div className={classes.editorEditContainer}>
+                                <p className={classes.editorEditText}>Edit an Item</p>
+                                <div className={classes.editorEditArea}>  
+                                    <div className={classes.editorEditInput}>
+                                        <div className={classes.editorItemInput}>Name: <input className={classes.editorEditName} type='text' placeholder={itemToBeEditted.name} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, name: e.target.value}})}} /></div>
+                                        <div className={classes.editorItemInput2}>Description: <textarea className={classes.editorEditDescription} type='text' placeholder={itemToBeEditted.description} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, description: e.target.value}})}} /></div>
+                                        <div className={classes.editorItemInput2}>Ingredients: <textarea className={classes.editorEditIngredients} type='text' placeholder={itemToBeEditted.ingredients} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, ingredients: e.target.value}})}} /></div>
+                                        {/* <div className={classes.editorEditArea}>Price: <input className={classes.editorInput} type='text' placeholder={itemToBeEditted.price} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, price: e.target.value}})}} /></div>
+                                        <div className={classes.editorEditArea}>Image: <input type='file' onChange={(e) => {setItemImage(e.target.files[0])}} /></div> */}
+                                    </div>
+                                    <div className={classes.editorEditButtons}>
+                                        <div className={classes.editorItemInput}>Price: <input className={classes.editorEditPrice} type='text' placeholder={itemToBeEditted.price} onChange={(e) => {setItemToBeEditted((prev) => {return {...prev, price: e.target.value}})}} /></div>
+                                        <div className={classes.editorItemInput}>Image: <input className={classes.editorEditImage} type='file' onChange={(e) => {setItemImage(e.target.files[0])}} /></div>
+                                        <div className={classes.editorCheckBox}>
+                                            <input type="checkbox" id="vege" checked={itemToBeEditted.vege} onClick={
+                                                (e) => {setItemToBeEditted((prev) => {return {...prev, vege: e.target.checked}})}
+                                                } />
+                                            <label for="vege"> vegetarian</label>
+                                        </div>
+                                        <div className={classes.editorCheckBox}>
+                                            <input type="checkbox" id="vegan" checked={itemToBeEditted.vegan} onClick={
+                                                (e) => {setItemToBeEditted((prev) => {return {...prev, vegan: e.target.checked}})}
+                                                } />
+                                            <label for="vegan"> vegan</label>
+                                        </div>
+                                        <div className={classes.editorCheckBox}>
+                                            <input type="checkbox" id="halal" checked={itemToBeEditted.halal} onClick={
+                                                (e) => {setItemToBeEditted((prev) => {return {...prev, halal: e.target.checked}})}
+                                                } />
+                                            <label for="halal"> halal</label>
+                                        </div>
+                                        <div className={classes.editorCheckBox}>
+                                            <input type="checkbox" id="featured" checked={itemToBeEditted.featured} onClick={
+                                                (e) => {setItemToBeEditted((prev) => {return {...prev, featured: e.target.checked}})}
+                                                } />
+                                            <label for="featured"> featured</label>
+                                        </div>
+                                        <div className={classes.editorButtonArea}>
+                                            <button className={classes.editorSaveButton} onClick={onEditItemConfirmed}>Save</button>
+                                            <button className={classes.editorCancelButton} onClick={onEditItemCanceled}>Cancel</button>
                                         </div>
                                     </div>
-                                )}
-                                <button onClick={AddMenuHandler}>+ Add</button>
+                                </div>
                             </div>
                         </div>
-                    ) : (
-                        <p>choose category</p>
-                    )
-                }
+                    )}
+                    <hr size="1" color="#6B2200" className={classes.line}></hr>
+                    <div className={classes.currentCategoryArea}>
+                    {
+                        (currentCategory) ? (
+                            <div>
+                                {/* <p>currentCategory: {currentCategory.name} </p> */}
+                                <div className={classes.itemContent}>
+                                    <div className={classes.Itext}> Items</div>
+                                    <div className={classes.itemArea}>
+                                        {
+                                            props.restaurant.categories.items.filter((category) => {
+                                                return category.id === currentCategory.id
+                                            }).map((category, index) => {
+                                                return category.items.items.map((item, index) => {
+                                                    if (!(item.hidden)) {
+                                                        return (
+                                                            <div className={classes.itemlist} key={item.id ? item.id : index}>
+                                                                <div className={classes.itemDescription}>
+                                                                    <div  className={classes.itemImage1}>
+                                                                        <img className={classes.itemImage} src={item.image}></img>
+                                                                    </div>
+                                                                    <div className={classes.itemName1}>
+                                                                        <p className={classes.itemName}>{item.name}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className={classes.itemButtons}>
+                                                                    <button className={classes.itemButton} onClick={() => onDeleteButtonClicked(item)}><img className={classes.buttonImage} src={image}/></button>
+                                                                    <button className={classes.itemButton} onClick={() => onEditItemButtonClicked(item)}><img className={classes.buttonImage} src={image2}/></button>
+                                                                    <button className={classes.itemButton} onClick={async() => await onHideButtonClicked(item)}><img className={classes.buttonImage} src={image3}/></button>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                }) 
+                                            })
+                                        }
+                                    </div>
+                                    <div className={classes.itemArea}>
+                                        {
+                                            props.restaurant.categories.items.filter((category) => {
+                                                return category.id === currentCategory.id
+                                            }).map((category, index) => {
+                                                return category.items.items.map((item, index) => {
+                                                    if (item.hidden) {
+                                                        return (
+                                                            <div className={classes.itemlist} key={item.id ? item.id : index}>
+                                                                <div className={classes.itemDescription}>
+                                                                    <div  className={classes.itemImage1}>
+                                                                        <img className={classes.itemImage} src={item.image}></img>
+                                                                    </div>
+                                                                    <div className={classes.itemName1}>
+                                                                        <p className={classes.itemName}>{item.name}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className={classes.itemButtons}>
+                                                                    <button className={classes.itemButton} onClick={() => onDeleteButtonClicked(item)}><img className={classes.buttonImage} src={image}/></button>
+                                                                    <button className={classes.itemButton} onClick={() => onEditItemButtonClicked(item)}><img className={classes.buttonImage} src={image2}/></button>
+                                                                    <button onClick={async() => await onRevealButtonClicked(item)}>reveal</button>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    }
+                                                }) 
+                                            })
+                                        }
+                                    </div>
+                                    {itemAdderOpened && (
+                                        <div>
+                                            <div className={classes.backdrop} onClick={onAddItemCancel} />
+                                            <div className={classes.editorEditContainer}>
+                                                <p className={classes.editorEditText}> Add a new Item </p>
+                                                <div className={classes.editorEditArea}>  
+                                                    <div className={classes.editorEditInput}>
+                                                        <div className={classes.editorItemInput}>Name: <input className={classes.editorEditName} type='text' onChange={(e) => {setItemName(e.target.value)}} /></div>
+                                                        <div className={classes.editorItemInput2}>Description: <textarea className={classes.editorEditDescription} type='text' onChange={(e) => {setItemDescription(e.target.value)}} /></div>
+                                                        <div className={classes.editorItemInput2}>Ingredients: <textarea className={classes.editorEditIngredients} type='text' onChange={(e) => {setItemIngredients(e.target.value)}} /></div>
+                                                    </div>
+                                                    <div className={classes.editorEditButtons}>
+                                                        <div className={classes.editorItemInput}>price: $<input className={classes.editorEditPrice} type='text' onChange={(e) => {setItemPrice(e.target.value)}} /></div>
+                                                        <div className={classes.editorItemInput}>Image: <input className={classes.editorEditImage} type='file' onChange={(e) => {setItemImage(e.target.files[0])}} /></div>
+                                                        <div className={classes.editorCheckBox}>
+                                                            <input type="checkbox" id="vege" onClick={
+                                                                (e) => {setItemSpecilities((prev) => {return {...prev, vege: e.target.checked}})}
+                                                                } />
+                                                            <label for="vege">vegetarian</label>
+                                                        </div>
+                                                        <div className={classes.editorCheckBox}>
+                                                            <input type="checkbox" id="vegan" onClick={
+                                                                (e) => {setItemSpecilities((prev) => {return {...prev, vegan: e.target.checked}})}
+                                                                } />
+                                                            <label for="vegan">vegan</label>
+                                                        </div>
+                                                        <div className={classes.editorCheckBox}>
+                                                            <input type="checkbox" id="halal" onClick={
+                                                                (e) => {setItemSpecilities((prev) => {return {...prev, halal: e.target.checked}})}
+                                                                } />
+                                                            <label for="halal">halal</label>
+                                                        </div>
+                                                        <div className={classes.editorCheckBox}>
+                                                            <input type="checkbox" id="featured" onClick={
+                                                                (e) => {setItemSpecilities((prev) => {return {...prev, featured: e.target.checked}})}
+                                                                } />
+                                                            <label for="featured">featured</label>
+                                                        </div>
+                                                        <div className={classes.editorButtonArea}>
+                                                            <button className={classes.editorSaveButton} onClick={onAddItemConfirm}>Save</button>
+                                                            <button className={classes.editorCancelButton} onClick={onAddItemCancel}>Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                    <button className={classes.addButton} onClick={AddMenuHandler}>+ Add</button>
+                                </div>
+                            </div>
+                        ) : (
+                            <p className={classes.defaltText}>choose category</p>
+                        )
+                    }
+                    </div>
+                </div>
 
                 
             </div>

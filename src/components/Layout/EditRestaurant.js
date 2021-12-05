@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react/cjs/react.development';
 
 import Storage from '@aws-amplify/storage';
 import API from '@aws-amplify/api';
@@ -100,14 +100,17 @@ const EditRestaurant = (props) => {
     }
     
     return (
-        <div>
+        <div className={classes.editRestaurant}>
             {nameEditorOpened && (
                 <div>
                     <div className={classes.backdrop} onClick={onNameEditCancel} />
                     <div className={classes.editorContainer}>
-                        Restaurant Name: <input type='text' placeholder={props.restaurant.name} onChange={NameChangeHandler} />
-                        <button onClick={onNameEditConfirm}>Confirm</button>
-                        <button onClick={onNameEditCancel}>Cancel</button>
+                        <div className={classes.editorText}>Restaurant Name:</div>
+                        <div className={classes.editorInputArea}>
+                            <input className={classes.editorInput} type='text' placeholder={props.restaurant.name} onChange={NameChangeHandler} />
+                            <button className={classes.editorYesButton} onClick={onNameEditConfirm}>Confirm</button>
+                            <button className={classes.editorNoButton} onClick={onNameEditCancel}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}
@@ -115,25 +118,43 @@ const EditRestaurant = (props) => {
                 <div>
                     <div className={classes.backdrop} onClick={onLogoEditCancel} />
                     <div className={classes.editorContainer}>
-                        Logo: <input type='file' onChange={LogoChangeHandler} />
-                        <button onClick={onLogoEditConfirm}>Confirm</button>
-                        <button onClick={onLogoEditCancel}>Cancel</button>
+                        <div className={classes.editorText}>New Logo: </div>
+                        <div className={classes.editorInputArea}>
+                            <input className={classes.editorFileButton} type='file' onChange={LogoChangeHandler} />
+                            <button className={classes.editorYesButton} onClick={onLogoEditConfirm}>Confirm</button>
+                            <button className={classes.editorNoButton} onClick={onLogoEditCancel}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}
-            <div>
-                <div>
-                    Your restaurant : {props.restaurant.name}
+            <div className={classes.content}>
+                <div className={classes.text}>
+                    Your Restaurant
                 </div>
-                <div>
-                    <button onClick={EditNameButtonClickHandler}>edit</button>
-                </div>
-                <div>
-                    Logo : 
-                    <img src={props.restaurant.logo}></img>
-                </div>
-                <div>
-                    <button onClick={EditLogoButtonClickHandler}>edit</button>
+                <div className={classes.editArea}>
+                    <div className={classes.nameArea}>
+                        <div className={classes.restaurantName}>
+                            Restaurant Name
+                        </div>
+                        <div className={classes.name}>
+                            {props.restaurant.name}
+                        </div>
+                        <div className={classes.nameButton}>
+                            <button className={classes.button} onClick={EditNameButtonClickHandler}>edit</button>
+                        </div>
+                    </div>
+                    <hr size="1" color="#6B2200" className={classes.line}></hr>
+                    <div className={classes.logoArea}>
+                        <div className={classes.logoText}>
+                            Restaurant Logo
+                        </div>
+                        <div className={classes.logo}>
+                            <img className={classes.logosrc} src={props.restaurant.logo}></img>
+                        </div>
+                        <div className={classes.logobutton}>
+                            <button className={classes.button} onClick={EditLogoButtonClickHandler}>edit</button>
+                        </div> 
+                    </div>
                 </div>
             </div>
 

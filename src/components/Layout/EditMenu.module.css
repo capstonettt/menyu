@@ -5,7 +5,8 @@
     width: 100%;
     height: 100vh;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.75);    
+    background: rgba( 255, 255, 255, 0.6 );  
+    backdrop-filter: blur(1px);
 }
 
 .qrCodeContainer {
@@ -21,29 +22,642 @@
 .editorContainer {
     position: fixed;
     top: 30vh;
-    left: 10%;
-    width: 80%;
+    left: 25%;
+    height:30%;
+    width: 50%;
     z-index: 100;
+    border-color:  #EB5E30;
+    border-style: solid;
+    border-radius: 3vw;
+    border-width: 0.2em;
     overflow: hidden;
-    background-color: white;
+    background-color:#FFFBF4;
+    display: flex;
+    flex-direction: column;
+}
+
+.editorText{
+    /* margin-top: 9vh;
+    margin-bottom: 0.5em;
+    margin-right: 0%;
+    margin-left: 0%;
+    padding-left: 10vw; */
+    margin-top: 7vh;
+    margin-bottom: 0.5em;
+    margin-right: 0%;
+    margin-left: 0%;
+    padding-left: 5vw;
+    width: 100%;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.4vw;
+    color: #EB5E30;
+}
+.editorInputArea{
+    margin:0%;
+    width: 100%;
+    height:100%;
+    padding-left:  10vw;
+    /* margin-bottom: 2%; */
+    flex-direction: row;
+    /* justify-content: center;
+    align-content: center; */
+    /* background: red; */
+}
+
+.editorInput{
+    margin-right: 3%;
+    margin-top: 2vh;
+    height:3vw;
+    width: 20vw;;
+    min-width: 10em;
+    min-height: 2em;
+    border-style: solid;
+    border-color: #EB5E30;
+    border-radius: 0.5vw;
+    border-width: 0.1em;
+}
+.editorConfirmButton{
+    margin-right: 3%; 
+    height:3vw;
+    width: 7vw;
+    background: #EB5E30;
+    border-style: none;
+    border-width: 0.1em;
+    border-color:  #FFFBF4;
+    border-radius: 10vh;
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+}
+.editorCancelButton{
+    margin-right: 3%; 
+    height:3vw;
+    width: 7vw;
+    background: #FFFBF4;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color:  #EB5E30;
+    border-radius: 10vh;
+    color:  #EB5E30;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+}
+
+.editorFileButton{
+    padding: 0%;
+    margin-right: 0%; 
+    height:3vw;
+    width:20vw;
+    background: #FFFBF4;
+    border-width: 0.1em;
+    border-color:  #6B2200;
+    /* border-radius: 10vh; */
+    color:  #6B2200;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1vw;
 }
 
 .deleteModalContainer {
     position: fixed;
     top: 30vh;
-    left: 10%;
-    width: 80%;
+    left: 25%;
+    height:30%;
+    width: 50%;
     z-index: 100;
+    border-color:  #EB5E30;
+    border-style: solid;
+    border-radius: 3vw;
+    border-width: 0.2em;
     overflow: hidden;
-    background-color: white;
+    background-color:#FFFBF4;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.editorDeleteText{
+    margin-left: 7vw;
+    margin-right: 1.5vw;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #EB5E30;
+    /* background: #6B2200; */
+}
+.editorYesButton{
+    margin-right: 1vw; 
+    height:3vw;
+    width: 10%;
+    background: #EB5E30;
+    border-style: none;
+    border-width: 0.1em;
+    border-color:  #FFFBF4;
+    border-radius: 10vh;
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+}
+.editorNoButton{
+    margin-right: 3vw; 
+    height:3vw;
+    width: 10%;
+    background: #FFFBF4;
+    border-style: solid;
+    border-width: 0.1em;
+    border-color:  #EB5E30;
+    border-radius: 10vh;
+    color:  #EB5E30;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+}
+
+.editorEditContainer {
+    position: fixed;
+    top: 15vh;
+    left: 15%;
+    height:70vh;
+    width: 70%;
+    z-index: 100;
+    border-color:  #EB5E30;
+    border-radius: 3vw;
+    border-style: solid;
+    border-width: 0.21em;
+    overflow: hidden;
+    background-color:#FFFBF4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.editorEditArea{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-start;
+    align-items: flex-start; */
+}
+.editorEditText{
+    margin-bottom: 1vh;
+    margin-top: 5vh;
+    padding-left: 5vw;
+    width: 100%;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #EB5E30;
+}
+
+.editorEditInput{
+    margin-left: 5vw;
+    height: 50vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    /* background: rebeccapurple; */
+}
+.editorEditButtons{
+    /* margin-top: 12vh;
+    margin-left: 1vw; */
+    display: flex;
+    flex-direction: column;
+}
+.editorItemInput{
+    margin-bottom: 2vh;
+    width: 100%;
+    height: 10vh;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+    color: #EB5E30;
+    display: flex;
+    flex-direction: column;
+    /* background: #EB5E30; */
+}
+.editorItemInput2{
+    margin-bottom: 2vh;
+    width: 100%;
+    height: 20vh;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+    color: #EB5E30;
+    display: flex;
+    flex-direction: column;
+    /* background: #EB5E30; */
+}
+
+.editorEditName{
+    /* margin-right: 3%;
+    margin-top: 1vh; */
+    margin-top: 1vh;
+    height:5vh;
+    width: 20vw;
+    border-style: solid;
+    border-color: #EB5E30;
+    border-radius: 0.5vw;
+    border-width: 0.1em;
+}
+.editorEditDescription{
+    margin-top: 1vh;
+    height:30vh;
+    width: 25vw;
+    border-style: solid;
+    border-color: #EB5E30;
+    border-radius: 0.5vw;
+    border-width: 0.1em;
+    display: flex;
+    /* align-items: center; */
+    justify-content: flex-start;
+}
+.editorEditIngredients{
+    margin-top: 1vh;
+    height:30vh;
+    width: 25vw;
+    border-style: solid;
+    border-color: #EB5E30;
+    border-radius: 0.5vw;
+    border-width: 0.1em;
+}
+.editorEditPrice{
+    margin-top: 1vh;
+    height:5vh;
+    width: 20vw;
+    border-style: solid;
+    border-color: #EB5E30;
+    border-radius: 0.5vw;
+    border-width: 0.1em;
+}
+.editorEditImage{
+    margin-top: 2vh;
+    margin-left: 1vw;
+}
+.editorCheckBox{
+    color: #EB5E30;
+    margin-bottom: 1vh;
+}
+.editorButtonArea{
+    display: flex;
+    flex-direction: row;
+    margin-top: 3vh;
+}
+.editorSaveButton{
+    /* margin-top: 3vh;
+    margin-left: 5vw; */
+    margin-right: 3vw; 
+    height:3vw;
+    width:7vw;
+    background: #EB5E30;
+    border-style: none;
+    border-width: 0.1em;
+    border-color:  #FFFBF4;
+    border-radius: 10vh;
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
 }
 
 .loading {
     position: fixed;
     top: 30vh;
-    left: 10%;
-    width: 80%;
+    left: 25%;
+    width: 50%;
     z-index: 100;
+    border-color:  #EB5E30;
+    border-style: solid;
+    border-radius: 3vw;
+    border-width: 0.1em;
     overflow: hidden;
-    background-color: white;
+    background-color:#FFFBF4;
+    display: flex;
+}
+.loadingText{
+    color: #EB5E30;
+    padding-left: 25%;
+}
+
+.editMenu{
+    padding-top: 0%;
+    padding-bottom: 10%;
+    width: 100%;
+    background: #FFFBF4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainText{
+    margin-bottom: 0.5em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #6B2200;
+}
+
+.editArea{
+    padding: 3% 5%;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-color: #6B2200;
+    border-radius: 2em;
+    border-width: 0.1em;
+}
+
+.categoryArea{
+    padding:0% 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+
+.Ctext{
+    margin-top: 0em;
+    margin-bottom: 0.5em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    /*font-size: 18px;
+    line-height: 25px;
+    */
+    color: #6B2200;
+}
+
+.Citems{
+    /* background: red; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    /* align-items: center; */
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.eachItem{
+    padding: 1.5% 1%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.button{
+    /* padding: 20% 120%; */
+    width: 8vw;
+    height: 3vw;
+    min-width: 5em;
+    min-height: 2em;
+    border-style: solid;
+    border-radius: 100vh;
+    background: #6B2200;
+    border: 0px;
+    box-sizing: border-box;
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-align: center;
+    overflow: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+    /* display: flex;
+    justify-content: space-around;
+    align-items: center; */
+}
+.button::-webkit-scrollbar{
+    display:none;
+}
+.button:hover{
+    background: #EB5E30;
+}
+.selectedbutton{
+    width: 8vw;
+    height: 3vw;
+    min-width: 5em;
+    min-height: 2em;
+    border-style: solid;
+    border-radius: 100vh;
+    background: #EB5E30;
+    border: 0px;
+    box-sizing: border-box;
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-align: center;
+    overflow: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+.selectedbutton::-webkit-scrollbar{
+    display:none;
+}
+
+.buttonSection{
+    padding-top:  3%;
+    padding-bottom: 3%;
+    padding-left: 1.4%;
+    /* background: red; */
+}
+
+.Cbutton{
+    width: 7.9vw;
+    height: 2.9vw;
+    min-width: 5em;
+    min-height: 2em;
+    border-style: solid;
+    border-radius: 100vh;
+    background: #FFFBF4;
+    border: normal;
+    border-width: 0.1em;
+    border-color: #6B2200;
+    /* box-sizing: border-box; */
+    color:  #6B2200;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.line{
+    color: #6B2200;
+    width: 85%;
+    background-color: #6B2200; 
+}
+
+.currentCategoryArea{
+    padding:0% 8%;
+    /* display: flex;
+    flex-direction: column; */
+    /* justify-content: center;
+    align-items: left; */
+}
+
+.itemContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* align-content: flex-start; */
+}
+
+.Itext{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    /*font-size: 18px;
+    line-height: 25px;
+    */
+    color: #6B2200;
+}
+.itemArea{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 110%;
+    /* justify-content: flex-start;
+    align-items: flex-start; */
+}
+.itemlist{
+    padding-bottom:  3%;
+    padding-right: 3vw;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-start;
+    align-items: center; */
+}
+.itemDescription{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    /* background: blue; */
+}
+.itemButtons{
+    padding-bottom: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+}
+.itemImage1{
+}
+.itemName1{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.itemImage{
+    margin: 0%;
+    width: 9vw;
+    height: 9vw;
+    object-fit: cover;
+    border-radius: 20%;
+    background: #6B2200;
+    min-width: 5em;
+    min-height: 5em;
+}
+.itemName{
+    margin: 0%;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.3vw;
+    /*font-size: 18px;
+    line-height: 25px;
+    */
+    color: #6B2200;
+    width: 9vw;
+    /* display: flex;
+    justify-content: center; */
+    display: inline-block;
+    text-align: center;
+    overflow: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+.itemName::-webkit-scrollbar{
+    display:none;
+}
+
+.itemButton{
+    padding: 0%;
+    margin:5% 0%;
+    width: 3vw;
+    height: 3vw;
+    min-width: 2em;
+    min-height: 2em;
+    background: #FFFBF4;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonImage{
+    /* margin: 0%; */
+    width: 80%;
+    height: 80%;
+}
+
+.addButton{
+    margin: 0%;
+    width: 9vw;
+    height: 9vw;
+    min-width: 6em;
+    min-height: 6em;
+    border-style: solid;
+    border-radius: 20%;
+    background: #FFFBF4;
+    border: normal;
+    border-width: 0.1em;
+    border-color: #6B2200;
+    /* box-sizing: border-box; */
+    color:  #6B2200;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+}
+
+.defaltText{
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    color: #6B2200;
+}
+button:hover{
+    border: #EB5E30;
+    border-width: 0.1em;
+    border-style: solid;
+}
+button{
+    min-width: 5em;
+    min-height: 2em;
 }

@@ -5,16 +5,268 @@
     width: 100%;
     height: 100vh;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.75);    
+    /* background: rgba(0, 0, 0, 0.75);  */
+    background: rgba( 255, 255, 255, 0.6 );  
+    backdrop-filter: blur(1px);
 }
 
 .editorContainer {
-    position: fixed;
+    /* position: fixed;
     top: 30vh;
     left: 10%;
+    height:30%;
     width: 80%;
     z-index: 100;
+    border-color:  #EB5E30;
+    border-style: solid;
+    border-radius: 3vw;
+    border-width: 0.2em;
     overflow: hidden;
-    background-color: white;
+    background-color:#FFFBF4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; */
+
+
+    position: fixed;
+    top: 35vh;
+    left: 25%;
+    height:30%;
+    width: 50%;
+    z-index: 100;
+    border-color:  #EB5E30;
+    border-style: solid;
+    border-radius: 3vw;
+    border-width: 0.2em;
+    overflow: hidden;
+    background-color:#FFFBF4;
+    display: flex;
+    flex-direction: column;
+}
+
+.editorText{
+    /* margin-top: 9vh;
+    margin-bottom: 0.5em;
+    margin-right: 0%;
+    margin-left: 0%;
+    padding-left: 23vw;
+    width: 100%; */
+    margin-top: 7vh;
+    margin-bottom: 0.5em;
+    margin-right: 0%;
+    margin-left: 0%;
+    padding-left: 6vw;
+    width: 100%;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.4vw;
+    color:#EB5E30;
+}
+.editorInputArea{
+    /* margin:0%;
+    width: 100%;
+    height:100%;
+    padding-left:  23vw; */
+    margin:0%;
+    width: 100%;
+    height:100%;
+    padding-top:1vh;
+    padding-left:  10vw;
+    /* margin-bottom: 2%; */
+    flex-direction: row;
+    /* justify-content: center;
+    align-content: center; */
+    /* background: red; */
+}
+
+.editorInput{
+    margin-right: 3%;
+    margin-top: 1vh;
+    height:3vw;
+    width: 40%;
+    border-radius: 0.5vw;
+    border-width: 0.1em;
+    border-color:  #EB5E30;
+    border-style: solid;
+}
+.editorYesButton{
+    margin-right: 3%; 
+    height:3vw;
+    background: #EB5E30;
+    border-width: 0.1em;
+    border-color:  #EB5E30;
+    border-radius: 10vh;
+    border-style: solid; 
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+}
+.editorNoButton{
+    margin-right: 3%; 
+    height:3vw;
+    background: #FFFBF4;
+    border-width: 0.1em;
+    border-color:  #EB5E30;
+    border-radius: 10vh;
+    border-style: solid; 
+    color:  #EB5E30;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+}
+
+.editorFileButton{
+    padding: 0%;
+    margin-right: 0%; 
+    height:3vw;
+    width:20vw;
+    background: #FFFBF4;
+    border-width: 0.1em;
+    border-color:  #6B2200;
+    /* border-radius: 10vh; */
+    color:  #6B2200;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1vw;
+}
+
+.editRestaurant{
+    padding: 3% 0%;
+    width: 100%;
+    background: #FFFBF4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.text{
+    margin-bottom: 0.5em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #6B2200;
+}
+
+.editArea{
+    padding: 3% 5%;
+    display: flex;
+    flex-direction: column;
+    border: solid;
+    border-color: #6B2200;
+    border-radius: 2em;
+    border-width: 0.1em;
+}
+
+.nameArea{
+    padding:0% 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.restaurantName{
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    /*font-size: 18px;
+    line-height: 25px;
+    */
+    color: #6B2200;
+}
+
+.name{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    /*font-size: 18px;
+    line-height: 25px;
+    */
+    color: #6B2200;
+}
+
+.nameButton{
+
+}
+
+.line{
+    color: #6B2200;
+    width: 85%;
+    background-color: #6B2200; 
+}
+
+.logoArea{
+    padding:0% 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoText{
+    /* margin-top: 0.5em; */
+    margin-bottom: 6em;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    /*font-size: 18px;
+    line-height: 25px;
+    */
+    color: #6B2200;
+}
+
+.logo{
+    padding:1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logosrc{
+    /* width: 10em;
+    height: 10em; */
+    width: 10vw;
+    height: 10vw;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.logoButton{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.button{
+    /* padding: 7.5% 60%; */
+    border-radius: 100vh;
+    width: 5vw;
+    height: 2.5vw;
+    min-width: 5em;
+    min-height: 3vh;
+    background: #6B2200;
+    border: 0px;
+    box-sizing: border-box;
+    color:  #FFFBF4;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 

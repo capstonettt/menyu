@@ -13,7 +13,7 @@ const HomeHeader = () => {
     return (
         <div className={classes.container}>
             <MenyuButton classes={classes.button} onClickHandler={buttonClickHandler} />
-            <DropDownMenu />
+            <DropDownMenu classes={classes.button2}/>
         </div>
     );
 

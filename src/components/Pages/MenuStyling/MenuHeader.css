@@ -1,0 +1,14 @@
+.menu-header {
+  display: flex;
+  width: 100%;
+  height: 125px;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-header-image {
+  margin-top: 45px;
+  width: 60px;
+  height: 60px;
+}

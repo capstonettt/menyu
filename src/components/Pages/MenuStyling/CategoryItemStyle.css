@@ -1,0 +1,11 @@
+.category-item {
+  height: 40px;
+  border: 1px solid #752a07;
+
+  border-radius: 18px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 4px 8px;
+  display: inline-block;
+  text-align: center;
+}
