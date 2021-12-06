@@ -10,7 +10,8 @@ import { deleteItem } from '../../graphql/mutations';
 import { updateItem } from '../../graphql/mutations';
 import image from '../../assets/images/delete.png';
 import image2 from '../../assets/images/edit.png';
-import image3 from '../../assets/images/hide.png';
+import image3 from '../../assets/images/hide-icon.png';
+import image4 from '../../assets/images/show-icon.png';
 
 import classes from './EditMenu.module.css';
 import { v4 as uuid } from 'uuid';
@@ -313,14 +314,16 @@ const EditMenu = (props) => {
                 <div>
                     <div className={classes.backdrop} onClick={onQRCodeClosed} />
                     <div className={classes.qrCodeContainer}>
-                        <img src={qrCodeURLBase + 'https://new-feature.d1ac5hakempkoy.amplifyapp.com/menu/' + props.restaurant.id}></img>
+                        <div className={classes.editorText}>QRcode</div>
+                        <img className={classes.QRcode} src={qrCodeURLBase + 'https://new-feature.d1ac5hakempkoy.amplifyapp.com/menu/' + props.restaurant.id}></img>
+                        
                     </div>
                 </div>
 
             )}
-            { <div>
+            {/* { <div>
                 <button onClick={onQRCodeRequested}>QR Code</button>
-            </div> }
+            </div> } */}
             <div className={classes.content}>
                 <div className={classes.mainText}>
                     Your Menu
@@ -340,6 +343,12 @@ const EditMenu = (props) => {
                                 </div>
                             </div>
                         )}
+                        <div className={classes.QRcodeArea}>
+                            <div className={classes.Ctext}>QRcode</div>
+                                { <div className={classes.QRcodeButton}>
+                                    <button className={classes.Cbutton} onClick={onQRCodeRequested}>QR Code</button>
+                                </div> }
+                        </div>
                         <div className={classes.Ctext}>
                             Categories
                         </div>
@@ -480,7 +489,7 @@ const EditMenu = (props) => {
                                                                 <div className={classes.itemButtons}>
                                                                     <button className={classes.itemButton} onClick={() => onDeleteButtonClicked(item)}><img className={classes.buttonImage} src={image}/></button>
                                                                     <button className={classes.itemButton} onClick={() => onEditItemButtonClicked(item)}><img className={classes.buttonImage} src={image2}/></button>
-                                                                    <button onClick={async() => await onRevealButtonClicked(item)}>reveal</button>
+                                                                    <button className={classes.itemButton} onClick={async() => await onRevealButtonClicked(item)}><img className={classes.buttonImage} src={image4}/></button>
                                                                 </div>
                                                             </div>
                                                         )

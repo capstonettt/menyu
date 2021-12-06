@@ -10,13 +10,37 @@
 }
 
 .qrCodeContainer {
-    position: fixed;
+    /* position: fixed;
     top: 30vh;
     left: 10%;
     width: 80%;
     z-index: 100;
     overflow: hidden;
-    background-color: white;
+    background-color: white; */
+
+
+    position: fixed;
+    top: 30vh;
+    left: 25%;
+    height:30%;
+    width: 50%;
+    z-index: 100;
+    border-color:  #EB5E30;
+    border-style: solid;
+    border-radius: 3vw;
+    border-width: 0.2em;
+    overflow: hidden;
+    background-color:#FFFBF4;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: flex-start; */
+    /* align-items: flex-start; */
+}
+.QRcode{
+    padding-top: 5%;
+    padding-right: 35%;
+    width: auto;
+    height: 90%;
 }
 
 .editorContainer {
@@ -660,4 +684,14 @@ button:hover{
 button{
     min-width: 5em;
     min-height: 2em;
+}
+
+.QRcodeArea{
+    /* margin-top: 5vh; */
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: row;
+}
+.QRcodeButton{
+    padding-left: 33%;
 }
